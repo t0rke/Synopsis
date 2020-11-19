@@ -25,8 +25,9 @@
 /* Begin PBXFileReference section */
 		D32C01C42550B1FD0055F2A9 /* Synopsis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Synopsis; sourceTree = BUILT_PRODUCTS_DIR; };
 		D32C01C72550B1FE0055F2A9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		D3AC8B422550E5C500645B17 /* Sept28.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sept28.txt; sourceTree = "<group>"; };
-		D3AC8B432550E5C500645B17 /* Nov2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Nov2.txt; sourceTree = "<group>"; };
+		D3ABF7A325672BCB008A5AF0 /* matrix.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = matrix.txt; sourceTree = "<group>"; };
+		D3ABF7A425672BCB008A5AF0 /* sentences.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sentences.txt; sourceTree = "<group>"; };
+		D3ABF7A525672BCB008A5AF0 /* stopwords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stopwords.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +44,7 @@
 		D32C01BB2550B1FD0055F2A9 = {
 			isa = PBXGroup;
 			children = (
+				D3ABF7A225672BCB008A5AF0 /* common */,
 				D32C01C62550B1FD0055F2A9 /* Synopsis */,
 				D32C01C52550B1FD0055F2A9 /* Products */,
 			);
@@ -59,19 +61,19 @@
 		D32C01C62550B1FD0055F2A9 /* Synopsis */ = {
 			isa = PBXGroup;
 			children = (
-				D3AC8B412550E5C500645B17 /* sources */,
 				D32C01C72550B1FE0055F2A9 /* main.cpp */,
 			);
 			path = Synopsis;
 			sourceTree = "<group>";
 		};
-		D3AC8B412550E5C500645B17 /* sources */ = {
+		D3ABF7A225672BCB008A5AF0 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				D3AC8B422550E5C500645B17 /* Sept28.txt */,
-				D3AC8B432550E5C500645B17 /* Nov2.txt */,
+				D3ABF7A325672BCB008A5AF0 /* matrix.txt */,
+				D3ABF7A425672BCB008A5AF0 /* sentences.txt */,
+				D3ABF7A525672BCB008A5AF0 /* stopwords.txt */,
 			);
-			path = sources;
+			path = common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

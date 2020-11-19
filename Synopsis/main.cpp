@@ -37,15 +37,8 @@ vector<string> generate_lines(string filename) {
     vector<string> temp;
     vector<string> list;
     inf.open(filename);
-    if (!inf) {
-        cerr << "Coudn't open " + filename + ".txt" << endl;
-        exit(1);
-    }
-    while (getline(inf, line) && line.length() > 1) {
-        //strip(line);
-        list.push_back(line);
-        cout << line << endl;
-    }
+    if (!inf) cerr << "Coudn't open " + filename + ".txt\n";
+    while (getline(inf, line)) list.push_back(line);
     return list;
 }
 
@@ -53,30 +46,27 @@ vector<vector<double>> get_matrix(size_t size) {
     vector<vector<double>> matrix;
     ifstream inf("matrix.txt");
     matrix.resize(size, vector<double>(size));
-    for (size_t i = 0; i < size; ++i) {
-        for (size_t j = 0; j < size; ++j) {
-            inf >> matrix[i][j];
-        }
-    }
+    for (size_t i = 0; i < size; ++i)
+        for (size_t j = 0; j < size; ++j) inf >> matrix[i][j];
     return matrix;
 }
 
-vector<pair<string,int>> generate_features(string &body) {
+vector<pair<string,int>> generate_features(const vector<string> &stop_words) {
     vector<pair<string, int>> corpus;
+    std::ifstream in("sentences.txt");
+    std::stringstream buffer;
+    buffer << in.rdbuf();
+    std::string body = buffer.str();
+    stringstream ss(body);
     string word;
     vector<string> list;
-    stringstream ss(body);
     
-    // splits the string into a vector of strings
     while (ss >> word) list.emplace_back(word);
-    
     size_t word_count = list.size();
-    // puts duplicate elements size by side
     sort(begin(list), end(list));
         
     string root = list.front();
     int dupes = 0;
-    // calculates the frequency of every word by counting duplicate neighbors
     for (size_t i = 0; i < word_count; ++i) {
         if (root == list[i]) ++dupes;
         else {
@@ -87,10 +77,19 @@ vector<pair<string,int>> generate_features(string &body) {
     }
     // sorts in decending order
     sort(begin(corpus), end(corpus), compare());
+    cout << "Removing Stopwords: ->\n";
+    for (size_t i = 0; i < corpus.size(); ++i) {
+        for (size_t j = 0; j < stop_words.size(); ++j) {
+            if (corpus[i].first == stop_words[j]) {
+                corpus.erase(begin(corpus), begin(corpus) + i);
+                cout << "   Erasing: " << stop_words[j] << endl;
+            }
+        }
+    }
     cout << "Created Corpus:" << endl;
     return corpus;
 }
-// converts a string to  a vec rather shittly
+
 vector<string> string_to_vec(string &input) {
     vector<string> list;
     string temp;
@@ -159,19 +158,26 @@ vector<vector<double>> construct_similarity_matrix(vector<string> sentences) {
     return similarity_matrix;
 }
 
+vector<string> generate_stops(string filename) {
+    ifstream inf(filename);
+    vector<string> list;
+    stringstream buffer;
+
+    buffer << inf.rdbuf();
+    string temp, file = buffer.str();
+    stringstream ss(file);
+    while (ss >> temp) list.emplace_back(temp);
+    return list;
+}
 
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    //vector<string> sentences = generate_lines("Sept28.txt");
+    const vector<string> sentences = generate_lines("sentences.txt");
     const vector<vector<double>> matrix = get_matrix(303);
+    const vector<pair<string, int>> features = generate_features(generate_stops("stopwords.txt"));
     
-    for (int i = 0; i < matrix.size(); ++i) {
-        for (int j = 0; j < matrix[i].size(); ++j) {
-            //cout << matrix[i][j] << " ";
-        }
-       // cout << "\n";
-    }
+    
     
     //construct_similarity_matrix(sentences);
     //std::cout << "Hello, World!\n";
