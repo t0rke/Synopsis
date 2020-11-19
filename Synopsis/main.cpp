@@ -14,6 +14,11 @@
 
 using namespace std;
 
+struct compare {
+    bool operator()(const std::pair<std::string,int> &lhs, const std::pair<std::string,int> &rhs) const {
+        return (lhs.second > rhs.second);
+    }
+};
 
 void strip(string &str) {
     replace(str.begin(), str.end(), '-', ' ');
@@ -51,11 +56,39 @@ vector<vector<double>> get_matrix(size_t size) {
     for (size_t i = 0; i < size; ++i) {
         for (size_t j = 0; j < size; ++j) {
             inf >> matrix[i][j];
-            cout << matrix[i][j] << " ";
         }
-        cout << "\n";
     }
     return matrix;
+}
+
+vector<pair<string,int>> generate_features(string &body) {
+    vector<pair<string, int>> corpus;
+    string word;
+    vector<string> list;
+    stringstream ss(body);
+    
+    // splits the string into a vector of strings
+    while (ss >> word) list.emplace_back(word);
+    
+    size_t word_count = list.size();
+    // puts duplicate elements size by side
+    sort(begin(list), end(list));
+        
+    string root = list.front();
+    int dupes = 0;
+    // calculates the frequency of every word by counting duplicate neighbors
+    for (size_t i = 0; i < word_count; ++i) {
+        if (root == list[i]) ++dupes;
+        else {
+            corpus.push_back({root, dupes});
+            root = list[i];
+            dupes = 1;
+        }
+    }
+    // sorts in decending order
+    sort(begin(corpus), end(corpus), compare());
+    cout << "Created Corpus:" << endl;
+    return corpus;
 }
 // converts a string to  a vec rather shittly
 vector<string> string_to_vec(string &input) {
