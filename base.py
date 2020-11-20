@@ -5,7 +5,7 @@ import csv
 regex = re.compile('[^a-zA-Z]')
 
 file = open("sources/Sept28.txt", "r+")
-with open("references/stopwords.txt") as f:
+with open("common/stopwords.txt") as f:
     stop_words = f.read().splitlines()
 
 # print(stop_words)
@@ -22,8 +22,8 @@ while True:
     line = file.readline()
     if not line:
         break
-    if len(line) < 100:
-        continue
+    # if len(line) < 100:
+    #     continue
     # strips the non-letter characters and replaces by space
     line = line.replace('\'', '')
     line = line.replace('\n', '')
@@ -34,6 +34,7 @@ while True:
     # line = [w for w in line if w not in stop_words]
     sentences.append(line)
 file.close()
+print("cleaned")
 
 with open('sources/sentences.txt', 'w') as f:
     for item in sentences:

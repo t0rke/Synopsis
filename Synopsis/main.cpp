@@ -170,15 +170,41 @@ vector<string> generate_stops(string filename) {
     return list;
 }
 
+vector<double> calculate_simmilarity_scores(const vector<vector<double>> &matrix ) {
+    const size_t bound = matrix.size();
+    vector<double>sentence_simmilarity;
+    sentence_simmilarity.reserve(bound);
+    size_t sentence_count = 0;
+    for (size_t i  = 0; i < bound; ++i) {
+        //double sum = 0;
+        double min = 100;
+        size_t index = 0;
+        ++sentence_count;
+        cout << setprecision(10);
+        for (size_t j = 0; j < bound; ++j) {
+            //sum = sum + matrix[i][j];
+            if (matrix[i][j] == 0);
+            else if(matrix[i][j] < min) {
+                min = matrix[i][j];
+                index = j;
+            }
+        }
+        sentence_simmilarity.emplace_back(min);
+        cout << sentence_count << " most similar to " << index + 1 << " COS -> " << min << "\n";
+        //cout << min << endl;
+    }
+    return sentence_simmilarity;
+}
+
 
 int main(int argc, const char * argv[]) {
     // insert code here...
     const vector<string> sentences = generate_lines("sentences.txt");
-    const vector<vector<double>> matrix = get_matrix(303);
+    const vector<vector<double>> matrix = get_matrix(304);
     const vector<pair<string, int>> features = generate_features(generate_stops("stopwords.txt"));
-    
-    
-    
+    const vector<double> sentence_score = calculate_simmilarity_scores(matrix);
+    cout << sentences[4] << endl;
+    cout << sentences[5] << endl;
     //construct_similarity_matrix(sentences);
     //std::cout << "Hello, World!\n";
     return 0;
