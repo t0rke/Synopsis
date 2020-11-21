@@ -17,6 +17,9 @@ The following parts of this document will help you use this program with any doc
 7. Using similar sentences to eliminate redundant sentences and leave only the most important ones using a collection of binary trees
 8. Returning the desired length of text
 
+## Model
+The model for this project is composed of Genism's pretrained, twitter content model at a size of 15 million data vectors. This model was chosen becauae it has a wide range of information that could be used to determine how similar two sentences were.
+
 ## Functionality
 1. Part one -> Python
 2. Parth two -> C++
