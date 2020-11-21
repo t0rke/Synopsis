@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/common/matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/common/matrix.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/sentences.txt" beforeDir="false" afterPath="$PROJECT_DIR$/common/sentences.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/Sept28.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sources/Sept28.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/sentences.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sources/sentences.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +109,8 @@
       <option name="presentableId" value="Default" />
       <updated>1605743813908</updated>
       <workItem from="1605743819786" duration="11126000" />
-      <workItem from="1605830559777" duration="752000" />
+      <workItem from="1605830559777" duration="1137000" />
+      <workItem from="1605996926127" duration="1839000" />
     </task>
     <servers />
   </component>
@@ -116,37 +118,37 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="139" key="GridCell.Tab.0.bottom" timestamp="1605831234690">
+    <state width="1638" height="382" key="GridCell.Tab.0.bottom" timestamp="1605999647588">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="139" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1605760312771" />
+    <state width="1638" height="382" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1605999647588" />
     <state width="1638" height="139" key="GridCell.Tab.0.bottom/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1605831234690" />
-    <state width="1638" height="139" key="GridCell.Tab.0.center" timestamp="1605831234688">
+    <state width="1638" height="382" key="GridCell.Tab.0.center" timestamp="1605999647586">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="139" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1605760312769" />
+    <state width="1638" height="382" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1605999647586" />
     <state width="1638" height="139" key="GridCell.Tab.0.center/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1605831234688" />
-    <state width="1638" height="139" key="GridCell.Tab.0.left" timestamp="1605831234687">
+    <state width="1638" height="382" key="GridCell.Tab.0.left" timestamp="1605999647583">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="139" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1605760312767" />
+    <state width="1638" height="382" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1605999647583" />
     <state width="1638" height="139" key="GridCell.Tab.0.left/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1605831234687" />
-    <state width="1638" height="139" key="GridCell.Tab.0.right" timestamp="1605831234689">
+    <state width="1638" height="382" key="GridCell.Tab.0.right" timestamp="1605999647587">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="139" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1605760312770" />
+    <state width="1638" height="382" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1605999647587" />
     <state width="1638" height="139" key="GridCell.Tab.0.right/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1605831234689" />
     <state x="349" y="161" key="SettingsEditor" timestamp="1605749846422">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="349" y="161" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1605749846422" />
-    <state x="517" y="354" key="com.intellij.ide.util.TipDialog" timestamp="1605830559887">
+    <state x="517" y="354" key="com.intellij.ide.util.TipDialog" timestamp="1605996926160">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="517" y="354" key="com.intellij.ide.util.TipDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605743825576" />
+    <state x="517" y="354" key="com.intellij.ide.util.TipDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605996926160" />
     <state x="517" y="354" key="com.intellij.ide.util.TipDialog/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1605830559887" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Synopsis$base.coverage" NAME="base Coverage Results" MODIFIED="1605831234678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Synopsis$base.coverage" NAME="base Coverage Results" MODIFIED="1605998165147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

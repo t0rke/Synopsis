@@ -183,7 +183,7 @@ vector<double> calculate_simmilarity_scores(const vector<vector<double>> &matrix
         cout << setprecision(10);
         for (size_t j = 0; j < bound; ++j) {
             //sum = sum + matrix[i][j];
-            if (matrix[i][j] == 0);
+            if (i == j) continue;
             else if(matrix[i][j] < min) {
                 min = matrix[i][j];
                 index = j;
@@ -200,12 +200,15 @@ vector<double> calculate_simmilarity_scores(const vector<vector<double>> &matrix
 int main(int argc, const char * argv[]) {
     // insert code here...
     const vector<string> sentences = generate_lines("sentences.txt");
-    const vector<vector<double>> matrix = get_matrix(304);
+    const vector<vector<double>> matrix = get_matrix(sentences.size());
     const vector<pair<string, int>> features = generate_features(generate_stops("stopwords.txt"));
     const vector<double> sentence_score = calculate_simmilarity_scores(matrix);
-    cout << sentences[4] << endl;
-    cout << sentences[5] << endl;
+    cout << sentences[15] << endl;
+    cout << sentences[16] << endl;
     //construct_similarity_matrix(sentences);
     //std::cout << "Hello, World!\n";
     return 0;
 }
+
+// 1. Find the sentences with the greatest number of matches
+// 2. Group these sentences together as important and select one sentence out of each of these groups to display IF and only if They contain at least ONE feature!

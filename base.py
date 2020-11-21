@@ -4,7 +4,7 @@ import csv
 
 regex = re.compile('[^a-zA-Z]')
 
-file = open("sources/Sept28.txt", "r+")
+file = open("sources/sept28.txt", "r+")
 with open("common/stopwords.txt") as f:
     stop_words = f.read().splitlines()
 
@@ -46,10 +46,13 @@ model = Word2Vec(sentences)
 
 sentence_count = len(sentences)
 matrix = [[0 for i in range(sentence_count)] for j in range(sentence_count)]
-
+count = 0
+print("Iteration: ")
 for i in range(len(matrix)):
     start = time()
     for j in range(len(matrix[i])):
+        count = count + 1
+        print (count)
         matrix[i][j] = model.wv.wmdistance(sentences[i], sentences[j])
 
 print('Operations took')
