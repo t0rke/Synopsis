@@ -11,8 +11,12 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <map>
 
 using namespace std;
+
+
+const bool VERBOSE = false;
 
 struct compare {
     bool operator()(const std::pair<std::string,int> &lhs, const std::pair<std::string,int> &rhs) const {
@@ -42,12 +46,18 @@ vector<string> generate_lines(string filename) {
     return list;
 }
 
+// reads in the matrix from a file
 vector<vector<double>> get_matrix(size_t size) {
     vector<vector<double>> matrix;
     ifstream inf("matrix.txt");
     matrix.resize(size, vector<double>(size));
-    for (size_t i = 0; i < size; ++i)
-        for (size_t j = 0; j < size; ++j) inf >> matrix[i][j];
+    for (size_t i = 0; i < size; ++i) {
+        for (size_t j = 0; j < size; ++j) {
+            inf >> matrix[i][j];
+            // cout << matrix[i][j] <<  " ";
+        }
+        // cout << endl;
+    }
     return matrix;
 }
 
@@ -111,6 +121,7 @@ double cosine_distance(vector<double> sent1, vector<double> sent2) {
     return dot / (sqrt(denom_a) * sqrt(denom_b)) ;
 }
 
+// determines the cosine similarity of two parts
 double similarity(string sentence1_in, string sentence2_in) {
     const vector<string> sentence1 = string_to_vec(sentence1_in);
     const vector<string> sentence2 = string_to_vec(sentence1_in);
@@ -137,6 +148,7 @@ double similarity(string sentence1_in, string sentence2_in) {
     return 1 - cosine_distance(sent_one, sent_two);
 }
 
+// generates a 2D cosine similarity matrix
 vector<vector<double>> construct_similarity_matrix(vector<string> sentences) {
     vector<double> temp(0, sentences.size());
     vector<vector<double>> similarity_matrix(sentences.size(), vector<double>(sentences.size(), -99));
@@ -158,6 +170,7 @@ vector<vector<double>> construct_similarity_matrix(vector<string> sentences) {
     return similarity_matrix;
 }
 
+// generates a list of stop words
 vector<string> generate_stops(string filename) {
     ifstream inf(filename);
     vector<string> list;
@@ -170,17 +183,17 @@ vector<string> generate_stops(string filename) {
     return list;
 }
 
-vector<double> calculate_simmilarity_scores(const vector<vector<double>> &matrix ) {
+// finds sentences that are the most similar and categorizes them as matches
+vector<int> match_similar(const vector<vector<double>> &matrix ) {
     const size_t bound = matrix.size();
-    vector<double>sentence_simmilarity;
-    sentence_simmilarity.reserve(bound);
+    vector<int> match;
+    match.reserve(bound);
     size_t sentence_count = 0;
-    for (size_t i  = 0; i < bound; ++i) {
+    for (size_t i  = 0; i < bound; ++i, ++sentence_count) {
         //double sum = 0;
         double min = 100;
+        cout << setprecision(4);
         size_t index = 0;
-        ++sentence_count;
-        cout << setprecision(10);
         for (size_t j = 0; j < bound; ++j) {
             //sum = sum + matrix[i][j];
             if (i == j) continue;
@@ -189,24 +202,33 @@ vector<double> calculate_simmilarity_scores(const vector<vector<double>> &matrix
                 index = j;
             }
         }
-        sentence_simmilarity.emplace_back(min);
-        cout << sentence_count << " most similar to " << index + 1 << " COS -> " << min << "\n";
-        //cout << min << endl;
+        match.emplace_back(index);
+        if (VERBOSE) cout << sentence_count << " most similar to " << index << " COS -> " << min << "\n";
+        // cout << min << endl;
     }
-    return sentence_simmilarity;
+    return match;
 }
 
+void frequency(vector<int> vec, vector<string> sentences) {
+    map<int, int> freq;
+    for (int i = 0; vec[i]; i++) {
+        if (freq.find(vec[i]) == end(freq)) freq[vec[i]] = 1;
+        else freq[vec[i]]++;
+    }
+    cout << "The Synopsis is as follows:" << endl;
+    for (auto& it : freq) {
+        //cout << it.first << ' ' << it.second + 1 << '\n';
+        cout << sentences[it.first] << endl;
+    }
+    cout << "The source has been reduced: " << ((double) freq.size() / sentences.size()) * 100 << "%\n";
+}
 
 int main(int argc, const char * argv[]) {
     // insert code here...
     const vector<string> sentences = generate_lines("sentences.txt");
-    const vector<vector<double>> matrix = get_matrix(sentences.size());
-    const vector<pair<string, int>> features = generate_features(generate_stops("stopwords.txt"));
-    const vector<double> sentence_score = calculate_simmilarity_scores(matrix);
-    cout << sentences[15] << endl;
-    cout << sentences[16] << endl;
-    //construct_similarity_matrix(sentences);
-    //std::cout << "Hello, World!\n";
+    const vector<vector<double>> matrix = get_matrix(143);
+    const vector<int> sentence_score = match_similar(matrix);
+    frequency(sentence_score, sentences);
     return 0;
 }
 
