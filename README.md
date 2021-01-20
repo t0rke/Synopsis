@@ -1,6 +1,6 @@
 # *Synopsis*
 Synopsis is written in Python and C++ and is designed to condense a body of text to gather a quick synopsis.
-Through the use of Genism to embed a word into 3D space using its built-in Word2Vec SVM as well as text comparison in C++ Synopsis effectively generates a quick and effective summary of any body of the text.
+Through the use of Genism to embed a word into 3D space using its built-in Word2Vec Word mover model as well as text comparison in C++ Synopsis effectively generates a quick and effective summary of any body of the text.
 
 I wrote this program because I didn't have enough time to attend my Computer Science: Water Pressure class but still wanted to get a gist of what the class discussed during a given day. I normally would've resorted to watching a recorded lecture, but this class offered no such alternative. To address this issue, I noticed that ZOOM auto-generated class transcripts at the end of each class, which gave a second by the second report of what was being said.
 
@@ -18,7 +18,7 @@ The following parts of this document will help you use this program with any doc
 8. Returning the desired length of text
 
 ## Model
-The model for this project is composed of Genism's pretrained, twitter content model at a size of 15 million data vectors. This model was chosen becauae it has a wide range of information that could be used to determine how similar two sentences were.
+THe model I chose to use for this project was google's news headline model due ito its size and similarity in the material that I wanted to analyze. 
 
 ## Functionality
 1. Part one -> Python
