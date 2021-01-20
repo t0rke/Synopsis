@@ -19,14 +19,7 @@ sentence_president = 'The president greets the press in Chicago'
 def sanitize(sentence):
     return [w for w in sentence.lower().split() if w not in stop_words]
 
-# sentence_obama = sanitize(sentence_obama)
-sentence_president = sanitize(sentence_president)
-# sentence_orange = sanitize('Oranges are my favorite fruit')
-#
-# model.init_sims(replace=True)  # normalises to reduce cosine and euclid dist variability
-#
-# distance = model.wmdistance(sentence_obama, sentence_orange)
-# print('distance = %.4f' % distance)
+model.init_sims(replace=True)  # normalises to reduce cosine and euclid dist variability
 
 import re
 import os
