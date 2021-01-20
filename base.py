@@ -1,12 +1,38 @@
+import logging
+from math import trunc
+
+import gensim.downloader as api
+
+model = api.load('word2vec-google-news-300')  # import google's news Model
+from nltk.corpus import stopwords
+from nltk import download
+
+download('stopwords')  # Download stopwords list.
+stop_words = stopwords.words('english')
+
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
+sentence_obama = 'Obama speaks to the media in Illinois'
+sentence_president = 'The president greets the press in Chicago'
+
+
+def sanitize(sentence):
+    return [w for w in sentence.lower().split() if w not in stop_words]
+
+# sentence_obama = sanitize(sentence_obama)
+sentence_president = sanitize(sentence_president)
+# sentence_orange = sanitize('Oranges are my favorite fruit')
+#
+# model.init_sims(replace=True)  # normalises to reduce cosine and euclid dist variability
+#
+# distance = model.wmdistance(sentence_obama, sentence_orange)
+# print('distance = %.4f' % distance)
+
 import re
 import os
-import csv
 
 regex = re.compile('[^a-zA-Z]')
-
-file = open("sources/sept28.txt", "r+")
-with open("common/stopwords.txt") as f:
-    stop_words = f.read().splitlines()
+file = open("Sept28th.txt", "r+")
 
 # print(stop_words)
 
@@ -17,13 +43,15 @@ start = time()
 # reads line by line
 count = 0
 sentences = []
+rawsentences = []
 while True:
     count += 1
     line = file.readline()
     if not line:
         break
-    # if len(line) < 100:
-    #     continue
+    if len(line) < 250:
+        continue
+    rawsentences.append(line)
     # strips the non-letter characters and replaces by space
     line = line.replace('\'', '')
     line = line.replace('\n', '')
@@ -32,35 +60,33 @@ while True:
     line = line.strip()
     line = line.lower()
     # line = [w for w in line if w not in stop_words]
-    sentences.append(line)
+    sentences.append(sanitize(line))
 file.close()
 print("cleaned")
 
-with open('sources/sentences.txt', 'w') as f:
+with open("sentences.txt", 'w') as f:
     for item in sentences:
         f.write("%s\n" % item)
 
-from gensim.models import Word2Vec
-
-model = Word2Vec(sentences)
+with open("rawsentences.txt", 'w') as f:
+    for item in rawsentences:
+        f.write("%s" % item)
 
 sentence_count = len(sentences)
 matrix = [[0 for i in range(sentence_count)] for j in range(sentence_count)]
 count = 0
 print("Iteration: ")
 for i in range(len(matrix)):
-    start = time()
     for j in range(len(matrix[i])):
         count = count + 1
-        print (count)
-        matrix[i][j] = model.wv.wmdistance(sentences[i], sentences[j])
+        matrix[i][j] = model.wmdistance(sentences[i], sentences[j])
 
-print('Operations took')
-print(time() - start)
+print(count)
 
-with open("sources/matrix.txt", "w+") as my_csv:
-    csvWriter = csv.writer(my_csv, delimiter=' ')
-    csvWriter.writerows(matrix)
-
-
-
+# matrixPy = np.array(matrix)
+# np.trunc(matrixPy, decs=4)
+with open("matrix.txt", 'w') as f:
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            f.write("%.4f " % matrix[i][j])
+        f.write("\n")
