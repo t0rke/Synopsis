@@ -18,11 +18,11 @@ The following parts of this document will help you use this program with any doc
 8. Returning the desired length of text
 
 ## Model
-THe model I chose to use for this project was google's news headline model due ito its size and similarity in the material that I wanted to analyze. 
+The model I chose to use for this project was google's news headline model due ito its size and similarity in the material that I wanted to analyze. 
 
 ## Functionality
 1. Part one -> Python
-2. Parth two -> C++
+2. Part two -> C++
 
 ## Statistics
 
